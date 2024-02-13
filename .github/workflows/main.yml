@@ -1,5 +1,14 @@
-- name: Meson Build
-  uses: BSFishy/meson-build@v1.0.3
-  with:
-    action: test
-    directory: build
+name: Meson Build
+run-name: ${{ github.actor }} is building and testing
+on: [push]
+jobs:
+  Build and test
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+# uses: BSFishy/meson-build@v1.0.3
+# with:
+# action: test
+# directory: build
