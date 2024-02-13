@@ -1,6 +1,6 @@
 name: Meson Build
 run-name: ${{ github.actor }} is building and testing
-on: [push]
+on: [push, pull_request]
 jobs:
   Build-and-test:
     runs-on: ubuntu-latest
