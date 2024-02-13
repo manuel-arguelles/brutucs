@@ -5,27 +5,29 @@ jobs:
   Build-and-test:
     runs-on: ubuntu-latest
     steps:
+      - name: Prepare
+        run: apt-get install -y lcov gcovr
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
         uses: BSFishy/meson-build@v1.0.3
         with:
-          action: build
+          action: test
           directory: build
           setup-options: -Db_coverage=true
           options: --verbose
           meson-version: 1.3.1
           ninja-version: 1.11.1
-      - name: Test
-        uses: BSFishy/meson-build@v1.0.3
-        with:
-          action: test
-          directory: build
-      - name: Coverage
-        uses: BSFishy/meson-build@v1.0.3
-        with:
-          action: coverage
-          directory: build
+#      - name: Test
+#        uses: BSFishy/meson-build@v1.0.3
+#        with:
+#          action: test
+#          directory: build
+#      - name: Coverage
+#        uses: BSFishy/meson-build@v1.0.3
+#        with:
+#          action: coverage
+#          directory: build
       - name: Tidy
         uses: BSFishy/meson-build@v1.0.3
         with:
