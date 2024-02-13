@@ -1,0 +1,5 @@
+- name: Meson Build
+  uses: BSFishy/meson-build@v1.0.3
+  with:
+    action: test
+    directory: build
