@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Prepare
-        run: apt-get install -y lcov gcovr
+        run: sudo apt-get install -y lcov gcovr
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
