@@ -7,6 +7,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Build
+        uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: build
+          directory: build
+      - name: Test
+        uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: test
+          directory: build
+      - name: Coverage
+        uses: BSFishy/meson-build@v1.0.3
+        with:
+          action: coverage
+          directory: build
+          
       
 # uses: BSFishy/meson-build@v1.0.3
 # with:
