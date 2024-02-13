@@ -20,5 +20,3 @@ jobs:
           ninja-version: 1.11.1
       - name: Coverage
         run: ninja -C build coverage
-      - name: List
-        run: cd build; ls -R
