@@ -1,62 +1,57 @@
 #include "base58.h"
 
 #include <algorithm>
+#include <array>
+#include <cstddef>
 
-namespace Base58
+namespace
 {
 
-static const std::string alphabet {"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"};
+constexpr std::array<char, 58> ALPHABET { '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+constexpr std::size_t          MAX_LIMIT { 256 };
+
+template<typename T>
+std::size_t
+getStartingZeroes(const std::vector<T>& data)
+{
+    return std::distance(data.cbegin(), std::find_if(data.cbegin(), data.cend(), [](const auto value) { return value != 0x00; }));
+}
+
+} // namespace
+
+namespace Brutucs::Base58
+{
 
 std::string
 encode(const std::vector<unsigned char>& data)
 {
-    std::string result;
-    size_t zero_counter = 0;
-    size_t size = 0;
-    size_t j = 0;
-    int carry = 0;
-    std::vector<int> buffer;
+    const std::size_t zeroCounter = getStartingZeroes(data);
+    const std::size_t size        = (data.size() - zeroCounter) * 138 / 100 + 1;
 
-    for (size_t i = 0; i < data.size() && data[i] == 0x00; ++i) {
-        ++zero_counter;
-    }
+    std::string      result;
+    std::size_t      j     = 0;
+    std::size_t      carry = 0;
+    std::vector<int> buffer(size, 0x00);
 
-    size = (data.size() - zero_counter) * 138 / 100 + 1;
+    for (std::size_t i = zeroCounter, high = size - 1; i < data.size(); ++i, high = j) {
+        for (carry = data[i], j = size - 1; (j > high) || carry != 0x00; --j) {
+            carry     += MAX_LIMIT * buffer[j];
+            buffer[j]  = static_cast<unsigned char>(carry % ALPHABET.size());
+            carry     /= ALPHABET.size();
 
-    buffer.assign(size, 0);
-
-    for (size_t i = zero_counter, high = size - 1; i < data.size(); ++i, high = j) {
-        for (carry = data[i], j = size - 1; (j > high) || carry != 0; --j) {
-           carry += 256 * buffer[j];
-           buffer[j] = carry % 58;
-           carry /= 58;
-
-           if (j == 0) {
-               break;
-           }
+            if (j == 0) {
+                break;
+            }
         }
     }
 
-    for (j = 0; j < size && buffer[j] == 0; ++j) {
-    }
+    result.insert(result.begin(), zeroCounter, '1');
 
-    if (zero_counter > 0) {
-        result.insert(result.begin(), zero_counter, '1');
-    }
-
-    for (size_t i = zero_counter; j < buffer.size(); ++i, ++j) {
-        result += alphabet[buffer[j]];
+    for (std::size_t i = getStartingZeroes(buffer); i < buffer.size(); ++i) {
+        result += ALPHABET[buffer[i]];
     }
 
     return result;
 }
 
-std::vector<unsigned char>
-decode(const std::string&)
-{
-    // TODO: Implement
-
-    return {};
-}
-
-} // namespace Base58
+} // namespace Brutucs::Base58
