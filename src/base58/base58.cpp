@@ -10,6 +10,13 @@ namespace
 constexpr std::array<char, 58> ALPHABET { '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 constexpr std::size_t          MAX_LIMIT { 256 };
 
+/**
+ * Gets the number of zeroes at the beginning of the given data.
+ *
+ * @param data The data to evaluate.
+ *
+ * @return The number of zeroes at the beginning of the data.
+ */
 template<typename T>
 std::size_t
 getStartingZeroes(const std::vector<T>& data)
