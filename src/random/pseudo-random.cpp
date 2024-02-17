@@ -5,7 +5,7 @@
 namespace
 {
 
-constexpr std::uint8_t MAX_VALUE = 255;
+constexpr std::uint8_t MAX_VALUE { 255 };
 
 } // namespace
 

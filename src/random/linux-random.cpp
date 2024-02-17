@@ -5,8 +5,8 @@
 namespace
 {
 
-constexpr const char* RANDOM_DEVICE        = "/dev/urandom";
-constexpr const char* ERROR_READING_DEVICE = "Could not get random bytes.";
+constexpr const char* RANDOM_DEVICE { "/dev/urandom" };
+constexpr const char* ERROR_READING_DEVICE { "Could not get random bytes." };
 
 } // namespace
 
