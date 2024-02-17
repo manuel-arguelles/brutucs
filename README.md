@@ -1,3 +1,5 @@
+![Tests](https://github.com/manuel-arguelles/brutucs/actions/workflows/main.yml/badge.svg)
+
 # BruTuCs
 
 This is a toy project aimed to act as a kata to learn and play with tools that I don't get to use in my day-to-day work:

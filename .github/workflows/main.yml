@@ -1,4 +1,4 @@
-name: Meson Build
+name: Tests
 run-name: ${{ github.actor }} is building and testing
 on: [push, pull_request]
 jobs:
