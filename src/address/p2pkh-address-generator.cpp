@@ -8,10 +8,10 @@
 #include <openssl/evp.h>
 #include <openssl/param_build.h>
 
-static constexpr size_t  KEY_SIZE          = 32;
-static constexpr uint8_t NETWORK_KEY_ID    = 0x80;
-static constexpr uint8_t NETWORK_PUBLIC_ID = 0x00;
-static constexpr uint8_t COMPRESSED_ID     = 0x01;
+static constexpr std::size_t KEY_SIZE          = 32;
+static constexpr uint8_t     NETWORK_KEY_ID    = 0x80;
+static constexpr uint8_t     NETWORK_PUBLIC_ID = 0x00;
+static constexpr uint8_t     COMPRESSED_ID     = 0x01;
 
 namespace
 {
@@ -34,7 +34,7 @@ getPublicKeyCompressed(const std::vector<uint8_t>& privateKey)
         EC_POINT* const point = EC_POINT_new(group);
 
         if (point != nullptr) {
-            size_t keySize = 0;
+            std::size_t keySize = 0;
 
             EC_POINT_mul(group, point, key, nullptr, nullptr, nullptr);
 
@@ -70,7 +70,7 @@ getPublicKey(const std::vector<uint8_t>& privateKey)
         EC_POINT* const point = EC_POINT_new(group);
 
         if (point != nullptr) {
-            size_t keySize = 0;
+            std::size_t keySize = 0;
 
             EC_POINT_mul(group, point, key, nullptr, nullptr, nullptr);
 
