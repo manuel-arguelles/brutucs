@@ -7,6 +7,7 @@
 #include <openssl/err.h>
 #include <openssl/evp.h>
 #include <openssl/param_build.h>
+#include <openssl/provider.h>
 
 static constexpr std::size_t KEY_SIZE          = 32;
 static constexpr uint8_t     NETWORK_KEY_ID    = 0x80;
@@ -117,7 +118,12 @@ getRipemd160Hash(const std::vector<uint8_t>& data)
 {
     std::vector<uint8_t> hash(EVP_MD_get_size(EVP_ripemd160()));
 
+    OSSL_PROVIDER* legacy = OSSL_PROVIDER_load(nullptr, "legacy");
+
     EVP_Q_digest(nullptr, EVP_MD_name(EVP_ripemd160()), nullptr, data.data(), data.size(), hash.data(), nullptr);
+
+    if (legacy != nullptr)
+        OSSL_PROVIDER_unload(legacy);
 
     return hash;
 }
