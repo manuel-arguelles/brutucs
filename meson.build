@@ -7,7 +7,9 @@ project('brutucs', 'cpp',
 main_sources = []
 sources = []
 
+openssl_dep = dependency('openssl', method : 'pkg-config')
+
 subdir('src')
 subdir('test')
 
-executable('brutucs', sources + main_sources)
+executable('brutucs', sources + main_sources, dependencies : openssl_dep)
