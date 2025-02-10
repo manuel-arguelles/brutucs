@@ -1,7 +1,6 @@
 #ifndef P2PKH_ADDRESS_GENERATOR_H_
 #define P2PKH_ADDRESS_GENERATOR_H_
 
-// #include <random.h>
 #include "../random/random.h"
 
 #include "address-generator.h"
@@ -19,7 +18,7 @@ class P2pkhAddressGenerator : public AddressGenerator
     public:
 
         /**
-         * Initializes a new P2PKH address generator
+         * Initializes a new P2PKH address generator.
          *
          * @param random The random number generator to use.
          */

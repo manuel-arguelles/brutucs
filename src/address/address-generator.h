@@ -16,7 +16,7 @@ class AddressGenerator
     public:
 
         /**
-         * Destroys an instance of the AddressGenerator class
+         * Destroys an instance of the AddressGenerator class.
          */
         virtual ~AddressGenerator() = default;
 
